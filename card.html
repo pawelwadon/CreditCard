@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src=""></script>
+    <title>Credit card</title>
+</head>
+<body>
+    <div class="cardContainer">
+
+        <!-- the card view that the user will see -->
+        <div class="cardView">
+            <div class="cardFront">
+                <div class="cardJpg">
+                    <img src="chip.png" alt="cardchip">
+                    <img src="visa.png" alt="visalogo">
+                </div>
+                <div class="cardNumber">################</div>
+                <div class="cardFlex">
+                    <div class="cardElement">
+                        <span>Card holder</span>
+                        <div class="cardHolderName">Full name</div>
+                    </div>
+                    <div class="cardElement">
+                        <span>Card expires</span>
+                        <div class="cardExpiration">
+                            <span class="expMonth">Month</span>
+                            <span class="expYear">Year</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="cardBack">
+                <div class="backStripe"></div>
+                <div class="cvvBox">
+                    <span>cvv</span>
+                    <div class="cvvCode"></div>
+                    <img src="contactless.png" alt="contactless">
+                </div>
+                <div class="backVisa">
+                    <img src="visa.png" alt="cardchip">
+                </div>
+            </div>
+
+        </div>
+
+        <form>
+            <!-- user enter card number -->
+            <div class="inputData">
+                <span>Card number</span>
+                <input type="text" maxlength="16" id="cardnumberInput" inputmode="numeric" autocomplete="cc-number">
+            </div>
+            <!-- user enter his name and surname -->
+            <div class="inputData">
+                <span>Card holder</span>
+                <input type="text"  id="cardholderInput" maxlength="29">
+            </div>
+            <!-- user select month when his card validity expire -->
+            <div class="dateSelection">
+                <div class="inputData">
+                    <span>Expirtation month</span>
+                    <select class="monthSelection">
+                        <option value="month" selected disabled >month</option>
+                        <option value="01">01</option>
+                        <option value="02">02</option>
+                        <option value="03">03</option>
+                        <option value="04">04</option>
+                        <option value="05">05</option>
+                        <option value="06">06</option>
+                        <option value="07">07</option>
+                        <option value="08">08</option>
+                        <option value="09">09</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                    </select>
+                </div>
+            <!-- user select year when his card validity expire -->
+                <div class="inputData">
+                    <span>Expirtation year</span>
+                    <select class="yearSelection">
+                        <option value="year" selected disabled >year</option>
+                        <option value="2022">2022</option>
+                        <option value="2023">2023</option>
+                        <option value="2024">2024</option>
+                        <option value="2025">2025</option>
+                        <option value="2026">2026</option>
+                        <option value="2027">2027</option>
+                        <option value="2028">2028</option>
+                        <option value="2029">2029</option>
+                        <option value="2030">2030</option>
+                    </select>
+                </div>
+                <div class="inputData">
+                    <span>cvv</span>
+                    <input type="text" maxlength="3" id="inputCvv" placeholder="###">
+                </div>
+            </div>
+                <div class="cardBtn">
+                    <input type="submit" value="submit" class="subButton">
+                </div>
+        </form>
+    </div>
+
+    <!-- the data provided by the user is displayed on the card -->
+    <script>
+        document.querySelector('#cardnumberInput').oninput = () =>{
+            document.querySelector('.cardNumber').innerText = document.querySelector('#cardnumberInput').value;
+            document.querySelector('.cardNumber').style.color = 'white';
+        };
+
+        document.querySelector('#cardholderInput').oninput = () =>{
+            document.querySelector('.cardHolderName').innerText = document.querySelector('#cardholderInput').value;
+            document.querySelector('.cardHolderName').style.color = 'white';
+        };
+
+        document.querySelector('.monthSelection').oninput = () =>{
+            document.querySelector('.expMonth').innerText = document.querySelector('.monthSelection').value + "/";
+            document.querySelector('.expMonth').style.color = 'white';
+        };
+
+        document.querySelector('.yearSelection').oninput = () =>{
+            document.querySelector('.expYear').innerText = document.querySelector('.yearSelection').value;
+            document.querySelector('.expYear').style.color = 'white';
+        };
+
+        // card rotate
+        document.querySelector('#inputCvv').onmouseenter = () =>{
+            document.querySelector('.cardFront').style.transform = 'rotateY(-180deg)';
+            document.querySelector('.cardBack').style.transform = 'rotateY(0deg)';
+        };
+
+        document.querySelector('#inputCvv').onmouseleave = () =>{
+            document.querySelector('.cardFront').style.transform = 'rotateY(0deg)';
+            document.querySelector('.cardBack').style.transform = 'rotateY(180deg)';
+        };
+
+        document.querySelector('#inputCvv').oninput = () =>{
+            document.querySelector('.cvvCode').innerText = document.querySelector('#inputCvv').value;
+        };
+
+        document.querySelector('.subButton').onmouseenter = () =>{
+            document.querySelector('.cardFront').style.transform = 'scale(1.2)';
+        };
+
+        document.querySelector('.subButton').onmouseleave = () =>{
+            document.querySelector('.cardFront').style.transform = 'scale(1)';
+        };
+
+        document.querySelector('.cardView').onclick = () =>{
+            document.querySelector('.cardView').style.cursor = 'auto';
+            document.querySelector('.cardView').style.transition = '.4s ease';
+            document.querySelector('.cardView').style.transitionDelay = '.1s';
+            document.querySelector('.cardView').style.position = 'relative';
+            document.querySelector('.cardView').style.marginBottom = '-150px';
+            document.querySelector('form').style.zIndex = 'auto';
+            document.querySelector('form').style.boxShadow = '0px 15px 25px rgba(0, 0, 0, .1)';
+        };
+
+    </script>
+
+</body>
+</html>
